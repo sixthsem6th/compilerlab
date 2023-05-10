@@ -1,20 +1,9 @@
-inp = "((e+a).b*)*"#input("")
-"""
-Give your input in the above variable
-    a and b are the only terminals accepted by this script
-    e denotes epsilon
-    . is used for "and" operation Eg. ab = a.b
-    + is used for "or" operation Eg. a|b = a+b
-    * is the Kleene's Closure operator. You can give star operator after any closing brackets and terminals 
-"""
-
-
+inp = "((e+a).b*)*"
 _="-"
 
-start = 1 # denotes start of e-nfa table
-end = 1   # denotes end of our table which is initially same as start
-cur = 1   # denotes current position of our pointer
-# this is intitial e-nfa table with only one state which is start and end both
+start = 1 
+end = 1   
+cur = 1   
 table = [["state","epsilon","a","b"],
           [1,_,_,_]]
 
@@ -156,26 +145,20 @@ def star(cur,ed=end):
 
 
 def mod_table(inp,start,cur,end,table):
-    #print(inp)
     k = 0
     while k<len(inp):
-        #print(start,cur,end,k,inp[k:],len(table)-1)
         if inp[k]=="a":
             end = a_(cur,end)
-            #print("in a_")
         elif inp[k]=="b":
             end = b_(cur,end)
-            #print("in b_")
         elif inp[k]=="e":
             end = e_(cur,end)
         elif inp[k]==".":
             k+=1
             if inp[k]=="a":
-                #k-=1
                 cur,end = and_a(cur,end)
             elif inp[k]=="b":
                 cur,end = and_b(cur,end)
-                #k-=1
             elif inp[k]=="(":
                 li = ["("]
                 l = k
@@ -199,15 +182,12 @@ def mod_table(inp,start,cur,end,table):
             k+=1
             if inp[k]=="a":
                 or_a(cur,end)
-                #print("in or_a")
             elif inp[k]=="b":
                 or_b(cur,end)
-                #print("in or_b")
             else:
                 print(f"ERROR at{k }Done:{inp[:k+1]}Rem{inp[k+1:]}")
         
         elif inp[k]=="*":
-            #print("in star")
             cur,end = star(cur,end)
         elif inp[k]=="(":
             li = ["("]
@@ -231,7 +211,6 @@ def mod_table(inp,start,cur,end,table):
                     cur_ = cur
             except:
                 pass
-            #print(inp[m+1:l+1])
             start,cur,end,table = mod_table(inp[m+1:l+1],start,cur,end,table)
             try:
                 if inp[k+1]=="*":
