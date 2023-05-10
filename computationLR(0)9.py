@@ -17,10 +17,7 @@ for i in terms+non_terms:
 
 
 non_terms += ["S'"]
-# each row in state table will be dictionary {nonterms ,term,$}
 stateTable = []
-# I = [(terminal, closure)]
-# I = [("S","A.A")]
 
 def Closure(term, I):
 	if term in non_terms:
@@ -28,7 +25,6 @@ def Closure(term, I):
 			I+=[(term,"."+i)]
 	I = list(set(I))
 	for i in I:
-		# print("." != i[1][-1],i[1][i[1].index(".")+1])
 		if "." != i[1][-1] and i[1][i[1].index(".")+1] in non_terms and i[1][i[1].index(".")+1] != term:
 			I += Closure(i[1][i[1].index(".")+1], [])
 	return I
@@ -49,7 +45,6 @@ while countI<len(omegaList):
 			indx = i[1].index(".")
 			vars_in_I+=[i[1][indx+1]]
 	vars_in_I = list(set(vars_in_I))
-	# print(vars_in_I)
 	for i in vars_in_I:
 		In = []
 		for j in Is:
@@ -81,7 +76,6 @@ for i in omegaList:
 	print(f'I{omegaList.index(i)}: {i}')
 
 
-#populate replace elements in state Table
 I0 = []
 for i in list(omegaList[0]):
 	I0 += [i[1].replace(".","")]
