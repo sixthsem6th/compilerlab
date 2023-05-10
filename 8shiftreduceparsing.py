@@ -2,7 +2,7 @@ gram = {
 	"E":["2E2","3E3","4"]
 }
 starting_terminal = "E"
-inp = "2324232$"
+inp = "id+id+id$"
 """
 # example 2
 gram = {
