@@ -1,8 +1,3 @@
-
-# #example for direct left recursion
-# gram = {"A":["Aa","Ab","c","d"]
-# }
-#example for indirect left recursion
 gram = {
 	"E":["E+T","T"],
 	"T":["T*F","F"],
@@ -16,10 +11,8 @@ def removeDirectLR(gramA, A):
 	tempInCr = []
 	for i in temp:
 		if i[0] == A:
-			#tempInCr.append(i[1:])
 			tempInCr.append(i[1:]+[A+"'"])
 		else:
-			#tempCr.append(i)
 			tempCr.append(i+[A+"'"])
 	tempInCr.append(["e"])
 	gramA[A] = tempCr
@@ -77,7 +70,6 @@ def rem(gram):
 			gramA[conv[i]].append(temp)
 
 
-	#print(gramA)
 	for i in range(c-1,0,-1):
 		ai = "A"+str(i)
 		for j in range(0,i):
@@ -122,7 +114,6 @@ for i in result:
 			if k not in result:
 				terminals+=[k]
 terminals = list(set(terminals))
-#print(terminals)
 
 def first(gram, term):
 	a = []
@@ -138,7 +129,6 @@ def first(gram, term):
 firsts = {}
 for i in result:
 	firsts[i] = first(result,i)
-#	print(f'First({i}):',firsts[i])
 
 def follow(gram, term):
 	a = []
@@ -164,7 +154,6 @@ for i in result:
 	if "e" in follows[i]:
 		follows[i].pop(follows[i].index("e"))
 	follows[i]+=["$"]
-#	print(f'Follow({i}):',follows[i])
 
 resMod = {}
 for i in result:
@@ -176,7 +165,6 @@ for i in result:
 		l.append(temp)
 	resMod[i] = l
 
-# create predictive parsing table
 tterm = list(terminals)
 tterm.pop(tterm.index("e"))
 tterm+=["$"]
