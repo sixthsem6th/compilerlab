@@ -1,7 +1,3 @@
-# #example for direct left recursion
-# gram = {"A":["Aa","Ab","c","d"]
-# }
-#example for indirect left recursion
 gram = {
 	"E":["E+T","T"],
 	"T":["T*F","F"],
@@ -15,10 +11,8 @@ def removeDirectLR(gramA, A):
 	tempInCr = []
 	for i in temp:
 		if i[0] == A:
-			#tempInCr.append(i[1:])
 			tempInCr.append(i[1:]+[A+"'"])
 		else:
-			#tempCr.append(i)
 			tempCr.append(i+[A+"'"])
 	tempInCr.append(["e"])
 	gramA[A] = tempCr
@@ -76,7 +70,6 @@ def rem(gram):
 			gramA[conv[i]].append(temp)
 
 
-	#print(gramA)
 	for i in range(c-1,0,-1):
 		ai = "A"+str(i)
 		for j in range(0,i):
@@ -131,10 +124,7 @@ firsts = {}
 for i in result:
 	firsts[i] = first(result,i)
 	print(f'First({i}):',firsts[i])
-# 	temp = follow(result,i,i)
-# 	temp = list(set(temp))
-# 	temp = [x if x != "e" else "$" for x in temp]
-# 	print(f'Follow({i}):',temp)
+
 
 def follow(gram, term):
 	a = []
