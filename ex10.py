@@ -1,9 +1,8 @@
 OPERATORS = set(['+', '-', '*', '/', '(', ')'])
 PRI = {'+':1, '-':1, '*':2, '/':2}
 
-### INFIX ===> POSTFIX ###
 def infix_to_postfix(formula):
-    stack = [] # only pop when the coming op has priority 
+    stack = [] 
     output = ''
     for ch in formula:
         if ch not in OPERATORS:
@@ -13,18 +12,16 @@ def infix_to_postfix(formula):
         elif ch == ')':
             while stack and stack[-1] != '(':
                 output += stack.pop()
-            stack.pop() # pop '('
+            stack.pop() 
         else:
             while stack and stack[-1] != '(' and PRI[ch] <= PRI[stack[-1]]:
                 output += stack.pop()
             stack.append(ch)
-    # leftover
     while stack: 
     	output += stack.pop()
     print(f'POSTFIX: {output}')
     return output
 
-### INFIX ===> PREFIX ###
 def infix_to_prefix(formula):
     op_stack = []
     exp_stack = []
@@ -48,7 +45,6 @@ def infix_to_prefix(formula):
                 exp_stack.append( op+b+a )
             op_stack.append(ch)
     
-    # leftover
     while op_stack:
         op = op_stack.pop()
         a = exp_stack.pop()
@@ -57,7 +53,6 @@ def infix_to_prefix(formula):
     print(f'PREFIX: {exp_stack[-1]}')
     return exp_stack[-1]
 
-### THREE ADDRESS CODE GENERATION ###
 def generate3AC(pos):
 	print("### THREE ADDRESS CODE GENERATION ###")
 	exp_stack = []
