@@ -32,11 +32,9 @@ while(True):
     for i in split[1].split("|"):
         rules.append(i)
 
-#logic for taking commons out
     for k, l in groupby(rules).items():
         r = [l[0] for l in takewhile(prefix, zip(*l))]
         common.append(''.join(r))
-#end of taking commons
     for i in common:
         newalphabet=alphabetset.pop()
         print(starting+"->"+i+newalphabet)
