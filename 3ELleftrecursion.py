@@ -1,6 +1,6 @@
 gram = {}
 
-def add(str):                               #to rules together
+def add(str):                               
     str = str.replace(" ", "").replace("	", "").replace("\n", "")
     x = str.split("->")
     y = x[1]
@@ -16,10 +16,8 @@ def removeDirectLR(gramA, A):
 	tempInCr = []
 	for i in temp:
 		if i[0] == A:
-			#tempInCr.append(i[1:])
 			tempInCr.append(i[1:]+[A+"'"])
 		else:
-			#tempCr.append(i)
 			tempCr.append(i+[A+"'"])
 	tempInCr.append(["e"])
 	gramA[A] = tempCr
@@ -77,7 +75,6 @@ def rem(gram):
 			gramA[conv[i]].append(temp)
 
 
-	#print(gramA)
 	for i in range(c-1,0,-1):
 		ai = "A"+str(i)
 		for j in range(0,i):
